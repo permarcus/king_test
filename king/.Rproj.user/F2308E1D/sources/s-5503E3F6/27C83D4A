@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541678146192.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "27C83D4A",
+    "lastKnownWriteTime" : 1541504641,
+    "last_content_update" : 1541504641,
+    "path" : "~/Documents/Arbetsprov/king/KingTest/R/collect_assignment_data.R",
+    "project_path" : "KingTest/R/collect_assignment_data.R",
+    "properties" : {
+        "cursorPosition" : "24,23",
+        "scrollLine" : "16",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

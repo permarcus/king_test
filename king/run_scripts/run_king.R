@@ -1,6 +1,7 @@
 # Loading packages of interest
 
 library(bigrquery)
+library(checkmate)
 library(yaml)
 library(dplyr)
 library(caret)
@@ -45,14 +46,14 @@ try_king <- try({
     conv_proportion <- king_konv_prop(cfg)
   
   # Collect assignment data from BIG google ----
-    #if(cfg$verbose) cat(args, "\n")
-    #if(cfg$verbose) cat("Collect assignment data\n")
-    #assignment_df <- collect_ass_df(cfg, rows = 1000)
+    if(cfg$verbose) cat(args, "\n")
+    if(cfg$verbose) cat("Collect assignment data\n")
+    assignment_df <- collect_ass_df(cfg, rows = 1000)
   
   # Collect activity data from BIG google ----
-    #if(cfg$verbose) cat(args, "\n")
-    #if(cfg$verbose) cat("Collect activity data\n")
-    #activity_df <- collect_act_df(cfg, assignment_df)
+    if(cfg$verbose) cat(args, "\n")
+    if(cfg$verbose) cat("Collect activity data\n")
+    activity_df <- collect_act_df(cfg, assignment_df)
   
   # Joining data sets for modelleing ----
     if(cfg$verbose) cat(args, "\n")

@@ -13,24 +13,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Setup
 
-The aim of this assignment have been to show if a diffence exists between two testgroups, `a` and `b`. The groups consists of users of a game where 80 % of the users belong to group `a` and 20 % belong to group `b`.
+The aim of this assignment has been to show if a diffence exists between two testgroups, `a` and `b`. The groups consists of users of a game where 80 % of the users belong to group `a` and 20 % belong to group `b`.
 
-Two data sets have been used for the assignment, `assignment` and `activity`. Both have been called from Googles cloud services using R and the package `BigRQuery`. Since the amount of data was large, a sample of 1000 users have been used. These 1000 users was randomly selected `assignment` and then all data connected to these users have been called from the `activity` data table. This sample 1000 unique users with a total of 24646 different observations.
+Two data sets have been used for the assignment, `assignment` and `activity`. Both have been called from Googles cloud services using R and the package `BigRQuery`. Since the amount of data was large, a sample of 1000 users have been used. These 1000 users was randomly selected from the `assignment` table and then all data connected to these users have been called from the `activity` table. These 1000 unique users had a total of 24646 different observations.
 
-The assignment will be split in two parts. The first part will handle simle statistics to understand if conversion and puchases are larger in group A or B, both in proportion and in frequency. I will also present plots on the distribution of `gameends`, `purchases` and `total_puchases` of set time period.
+The assignment will be split in two parts. The first part will handle simple statistics to understand if conversion and puchases are larger in group A or B, both in proportion and in frequency. I will also present plots on the distribution of `gameends`, `purchases` and `total_puchases` of set time period.
 
-The second part will present modelling and test if one can estimate the probability if player in each group will `convert`.
+The second part will present modelling and test if one can estimate the probability if players in each group will `convert` or not.
 
 ### Simple statistcs
 
-Following section will present the results from given time period. Plots will be presented to visualize the results and statistics will be presented to give inference.
+Following section will present the plots and statistics. Plots will be presented to visualize the results and statistics will be presented to give inference.
 
 #### Plots/Visualisation
 ```{r, echo=FALSE}
 plot(plots$conversion_in_group_1)
 ```
 
-Amount of conversion in groups show that it is more common to convert in group B than in group A. 
+Amount of conversion in groups implies that it is more common to convert in group B than in group A. 
 
 ```{r, echo=FALSE}
 plot(plots$conversion_in_group_2)
@@ -42,13 +42,13 @@ Proportion of conversion in groups show that it is more common to convert in gro
 plot(plots$scatter_total)
 ```
 
-The plot above shows that purchases are more common for players whom play between 0 and 30 `gameends` per day. It is also these players whom use the most `purchases` in total. It also look seems as if the linear relationship is stronger is only this data, `gameends` between 0 and 30, are stronger than if one would look at the data as a whole.
+The plot above shows that purchases are more common for players whom play between 0 and 30 `gameends` per day. It is also these players whom use the most `purchases` in total. It also seems as if the linear relationship in this data, `gameends` between 0 and 30, is stronger than if one would look at the data as a whole. This group would be interesting to take a closer look at.
 
 ```{r, echo=FALSE}
 plot(plots$scatter_a)
 ```
 
-The behaviour of group A is similar to that of the total, which is to be expected since group A contains 80 % of all data.
+The behaviour of group A is similar to that of the total, which is to be expected since group A contains 80 % of the data.
 
 ```{r, echo=FALSE}
 plot(plots$scatter_b)
@@ -82,14 +82,14 @@ The aim of my study in the modelling part will be to see if we can estimte `conv
 For modelling purposes the data table was split in two parts, training and validation/test. 
 
 #### Concerns about data for the modelling
-Before I started modelling the data I realized that some of the analysis which I considered to was not possible. I thought it would be interesting to see if the number of played games had impact on `conversion`, but data customers don't have data from `installation_date` to first `activity_date`. This means that this analysis is not possible. 
+Before I started modelling the data I realized that some of the analysis which I considered to do was not possible. I thought it would be interesting to see if the total number of played games had impact on `conversion`, but the table does not contain all data from `installation_date` to first `activity_date`. This means that this analysis is not possible. 
 
 To get around this problem I choose to look at the total amount of `gameends` per player during the set time frame to see if that had any impact on `conversion`. 
 
 #### Modelling groups
-The modelling was done for both of the groups, one modell for group A and one modell for group B. I applied a simple GLM-logit model to estimate the probability of `conversion` for player based on `total_gameends`. 
+The modelling was done for both of the groups, one modell for group A and one modell for group B. I applied a simple GLM-logit model to estimate the probability of `conversion` for players based on `total_gameends`, where `total_gameends` is the total amount of `gameends` during the time of the study. 
 
-The aim of the models is to see if players in group one or group to have a higher probability to `convert`.
+The aim of the models is to see if players in group A or group B have a higher probability to `convert`.
 
 #### Validation of models
 The validation on modelling has been done by RMSE, accuracy and confussion matrix. Results from the two models are as follows.
@@ -129,13 +129,18 @@ Error estimation:
 king_validate$b$confusion_matrix$overall
 ```
 
-It is clear that the models are not accurat. Based on the RMSE and the accuracy of the models more data would be of interest to look at. The confussion matrix somewhat tells us that the classification works, but as stated, it would be interesting to add something to the box.
+It is clear that the models are not accurat. The RMSE for both models are high, meaning that the volatility in the models are high. The accuracy, which is based on the confussion matrix is ok, but the threshold for the confussion matrix is manually set to 0.5, why both accuracy and confussion matrix may not give a true picture.
 
+Becasue of this it is my recommendation to add data to the model for a more accurat results in regards to estimation of `conversion`.
 
 ### Overall
 Game version for group B shows better results. For this reason, it is recommended to use version B.
 
-Regarding modelling more data is needed to better estimate the probability of conversion.
+For further analysis it would be interesting to check if the average number of `gameends` per player differed between the two groups. I would also like to check if the number of `purchases` was different depending on how many `gameends` the players did in each group. This was shortly mentioned in the plots section. In that section we can see visually that players with 0 to 30 `gameends` have a higher tendency for `conversion` and `purchases`. Splitting the data in different groups based on `gameends` and creating inference on these individual groups could give an understanding in what groups would be better to target in regards to `converion` and `purchases`.
+
+Regarding modelling more data or a different setup, such as the previously mentioned data split, is needed to better estimate the probability of `conversion`.
+
+Reagaring what was tested, I quess it is the number of games a player can play for free per day.
 
 //Per Marcus
 

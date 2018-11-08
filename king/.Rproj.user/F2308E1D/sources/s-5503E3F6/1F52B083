@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541678771937.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3725973283",
+    "id" : "1F52B083",
+    "lastKnownWriteTime" : 1541678971,
+    "last_content_update" : 1541678971050,
+    "path" : "~/Documents/Arbetsprov/king/KingTest/R/model_evaluation.R",
+    "project_path" : "KingTest/R/model_evaluation.R",
+    "properties" : {
+        "cursorPosition" : "26,89",
+        "scrollLine" : "15",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
