@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541414398049.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "42EFA5E9",
+    "lastKnownWriteTime" : 1541673356,
+    "last_content_update" : 1541673356170,
+    "path" : "~/Documents/Arbetsprov/king/run_scripts/run_king.R",
+    "project_path" : "run_scripts/run_king.R",
+    "properties" : {
+        "cursorPosition" : "78,18",
+        "scrollLine" : "67",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

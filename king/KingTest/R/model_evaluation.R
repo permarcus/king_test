@@ -1,0 +1,35 @@
+#' Model evaluation king
+#' 
+#' @param king_df_list data frames started with
+#' @param king_model model created
+#' @param predictions predictions from test data set
+#' 
+#' @export
+model_eval <- function(king_df_list, king_model, predictions){
+  checkmate::assert_list(king_df_list)
+  checkmate::assert_list(king_model)
+  checkmate::assert_list(predictions)
+  
+ # Compute evaluation for group a
+  eval_list <- list()
+  eval_list$a$top <- sum(predictions$a$pred_class)
+  eval_list$a$threshold <- mean(predictions$a$conversion)
+  eval_list$a$rmse <- sqrt(mean((predictions$a$conversion - predictions$a$pred_class)^2))
+  
+  
+  predictions$a$pred_class <- as.numeric(predictions$a$pred_a > 0.5)
+  eval_list$a$confusion_matrix <- caret::confusionMatrix(factor(round(predictions$a$pred_class), levels = c("0","1")), factor(round(predictions$a$conversion), levels = c("0","1")))
+  
+  # Compute evaluation for group b
+  eval_list$b$top <- sum(predictions$b$pred_class)
+  eval_list$b$threshold <- mean(predictions$b$conversion)
+  eval_list$b$rmse <- sqrt(mean((predictions$b$conversion - predictions$b$pred_class)^2))
+  
+  
+  predictions$b$pred_class <- as.numeric(predictions$b$pred_b > 0.5)
+  eval_list$b$confusion_matrix <- caret::confusionMatrix(factor(round(predictions$b$pred_class), levels = c("0","1")), factor(round(predictions$b$conversion), levels = c("0","1")))
+  
+  return(eval_list)
+  
+  
+  }

@@ -1,0 +1,35 @@
+\name{KingTest-package}
+\alias{KingTest-package}
+\alias{KingTest}
+\docType{package}
+\title{
+\packageTitle{KingTest}
+}
+\description{
+\packageDescription{KingTest}
+}
+\details{
+
+The DESCRIPTION file:
+\packageDESCRIPTION{KingTest}
+\packageIndices{KingTest}
+~~ An overview of how to use the package, including the most important functions ~~
+}
+\author{
+\packageAuthor{KingTest}
+
+Maintainer: \packageMaintainer{KingTest}
+}
+\references{
+~~ Literature or other references for background information ~~
+}
+~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
+~~ documentation directory ~~
+\keyword{ package }
+\seealso{
+~~ Optional links to other man pages, e.g. ~~
+~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+}
+\examples{
+~~ simple examples of the most important functions ~~
+}

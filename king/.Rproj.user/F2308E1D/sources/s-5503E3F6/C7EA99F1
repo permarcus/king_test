@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541500905490.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "C7EA99F1",
+    "lastKnownWriteTime" : 1541511821,
+    "last_content_update" : 1541511821049,
+    "path" : "~/Documents/Arbetsprov/king/configs/test_king_kongfig.yaml",
+    "project_path" : "configs/test_king_kongfig.yaml",
+    "properties" : {
+        "cursorPosition" : "17,10",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}

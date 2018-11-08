@@ -1,0 +1,16 @@
+config: test
+
+io:
+  google:
+    project: "king-ds-recruit-candidate-91"
+    dataset: "abtest"
+    table: 
+      - "activity"
+      - "assignment"
+  output:
+    model_output:
+      "test_king/output"
+
+model:
+  model: log_lasso
+        

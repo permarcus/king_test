@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541671399493.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "926322640",
+    "id" : "5A949E77",
+    "lastKnownWriteTime" : 1541674243,
+    "last_content_update" : 1541674243464,
+    "path" : "~/Documents/Arbetsprov/king/markdown/test_rmark.Rmd",
+    "project_path" : "markdown/test_rmark.Rmd",
+    "properties" : {
+        "cursorPosition" : "15,0",
+        "last_setup_crc32" : "5503E3F6bb338d19",
+        "scrollLine" : "6",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,18 @@
+Package: KingTest
+Type: Package
+Title: Kingu solving
+Version: 0.1
+Date: 2018-11-05
+Author: Per Marcus
+Maintainer: Who to complain to <per.marcus@gmail.com>
+Description: Package for homeassignment by Mr Marcus for Kingu
+Imports:
+  checkmate,
+  dplyr,
+  e1071,
+  xgboost,
+  glmnet,
+  bigrquery,
+  yaml
+License: None
+RoxygenNote: 6.1.0

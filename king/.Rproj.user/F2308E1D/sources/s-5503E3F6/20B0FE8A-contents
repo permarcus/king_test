@@ -1,0 +1,94 @@
+---
+title: "King - Per Marcus"
+author: "Per Marcus"
+date: "November 7, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Assignment
+
+#### Setup
+The aim of this assignment have been to show if a diffence exists between two testgroups, `a` and `b`. The groups consists of users of a game where 80 % of the users belong to group `a` and 20 % belong to group `b`.
+
+Two data sets have been used for the assignment, `assignment` and `activity`. Both have been called from Googles cloud services using R and the package `BigRQuery`. Since the amount of data was large, a sample of 1000 users have been used. These 1000 users was randomly selected `assignment` and then all data connected to these users have been called from the `activity` data table. This sample 1000 unique users with a total of 24646 different observations.
+
+The aim of my study in the modelling part will be to see if we can estimte `conversion` based on the data that exists within the activity data table. `Conversion` is set if a user has ever done a purchase within game.
+
+The data table was split in two parts, training and validation/test. 
+
+After modelling is done, and results from the validation of the modells is presented I will present statistics based on the results in purchases and conversion within each group to see if they differ. These results will be presented by plots and statistics.
+
+
+#### Concerns about data for the modelling
+Before I started modelling the data I realized that some of the analysis which I considered to was not possible. I thought it would be interesting to see if the number of played games had impact on `conversion`, but data customers don't have data from `installation_date` to first `activity_date`. This means that this analysis is not possible. 
+
+To get around this problem I choose to look at the total amount of `gameends` per player during the set time frame to see if that had any impact on `conversion`. 
+
+#### Modelling
+The modelling was done for both of the groups, one modell for group A and one modell for group B. I applied a simple GLM-logit model to estimate the probability of `conversion` for player based on `total_gameends`. 
+
+#### Validation of models
+The validation on modelling has been done by RMSE, accuracy and confussion matrix. Results from the two models are as follows.
+
+Results of model for Group A
+RMSE:
+```{r echo=FALSE}
+king_validate$a$rmse
+```
+
+Confusion matrix:
+```{r echo=FALSE}
+king_validate$a$confusion_matrix$table
+```
+
+Error estimation:
+```{r echo=FALSE}
+king_validate$a$confusion_matrix$overall
+```
+
+
+Results of model for group B
+RMSE:
+```{r echo=FALSE}
+king_validate$b$rmse
+```
+
+Confusion matrix:
+```{r echo=FALSE}
+king_validate$b$confusion_matrix$table
+```
+
+Error estimation:
+```{r echo=FALSE}
+king_validate$b$confusion_matrix$overall
+```
+
+It is clear that the models are not aaccurat. Based on the RMSE and the accuracy of the models more data would be of interest to look at. The confussion matrix somewhat tells us that the classification works, but as stated, it would be interesting to add something to the box.
+
+#### Other Statistics
+
+```{r, echo=FALSE}
+plot(plots$conversion_in_group_1)
+```
+
+```{r, echo=FALSE}
+plot(plots$conversion_in_group_2)
+```
+
+```{r, echo=FALSE}
+plot(plots$scatter_total)
+```
+
+```{r, echo=FALSE}
+plot(plots$scatter_a)
+```
+
+```{r, echo=FALSE}
+plot(plots$scatter_b)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

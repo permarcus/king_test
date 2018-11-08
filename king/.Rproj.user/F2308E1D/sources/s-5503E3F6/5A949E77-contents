@@ -1,0 +1,141 @@
+---
+title: "King - Per Marcus"
+author: "Per Marcus"
+date: "November 7, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Assignment
+
+#### Setup
+
+The aim of this assignment have been to show if a diffence exists between two testgroups, `a` and `b`. The groups consists of users of a game where 80 % of the users belong to group `a` and 20 % belong to group `b`.
+
+Two data sets have been used for the assignment, `assignment` and `activity`. Both have been called from Googles cloud services using R and the package `BigRQuery`. Since the amount of data was large, a sample of 1000 users have been used. These 1000 users was randomly selected `assignment` and then all data connected to these users have been called from the `activity` data table. This sample 1000 unique users with a total of 24646 different observations.
+
+The assignment will be split in two parts. The first part will handle simle statistics to understand if conversion and puchases are larger in group A or B, both in proportion and in frequency. I will also present plots on the distribution of `gameends`, `purchases` and `total_puchases` of set time period.
+
+The second part will present modelling and test if one can estimate the probability if player in each group will `convert`.
+
+### Simple statistcs
+
+Following section will present the results from given time period. Plots will be presented to visualize the results and statistics will be presented to give inference.
+
+#### Plots/Visualisation
+```{r, echo=FALSE}
+plot(plots$conversion_in_group_1)
+```
+
+Amount of conversion in groups show that it is more common to convert in group B than in group A. 
+
+```{r, echo=FALSE}
+plot(plots$conversion_in_group_2)
+```
+
+Proportion of conversion in groups show that it is more common to convert in group B than in group A. 
+
+```{r, echo=FALSE}
+plot(plots$scatter_total)
+```
+
+The plot above shows that purchases are more common for players whom play between 0 and 30 `gameends` per day. It is also these players whom use the most `purchases` in total. It also look seems as if the linear relationship is stronger is only this data, `gameends` between 0 and 30, are stronger than if one would look at the data as a whole.
+
+```{r, echo=FALSE}
+plot(plots$scatter_a)
+```
+
+The behaviour of group A is similar to that of the total, which is to be expected since group A contains 80 % of all data.
+
+```{r, echo=FALSE}
+plot(plots$scatter_b)
+```
+
+Behaviour of group B seems to slightly differ in linear relationship from group A, where `gameends` 0 to 25 seems so give slightly more purchases.
+
+#### Statistics
+
+To check if the groups differ simple t.tests have been performed. Group A is defined by X and group B is defined by Y.
+
+Difference in `conversion`:
+```{r echo=FALSE}
+statistics_king$king_ttest_conv
+```
+
+Difference in `purchases`:
+```{r echo=FALSE}
+statistics_king$king_ttest_purchases
+```
+
+With statistical certainty, we can say that group B has a higher conversion rate and a higher purchase rate.
+
+#### Results from statistics
+The results tell us that, using the gameversion which was used for group B will be better than using the one for group A.
+
+
+### Modelling
+The aim of my study in the modelling part will be to see if we can estimte `conversion` based on the data that exists within the activity data table. `Conversion` is set if a user has ever done a purchase within game.
+
+For modelling purposes the data table was split in two parts, training and validation/test. 
+
+#### Concerns about data for the modelling
+Before I started modelling the data I realized that some of the analysis which I considered to was not possible. I thought it would be interesting to see if the number of played games had impact on `conversion`, but data customers don't have data from `installation_date` to first `activity_date`. This means that this analysis is not possible. 
+
+To get around this problem I choose to look at the total amount of `gameends` per player during the set time frame to see if that had any impact on `conversion`. 
+
+#### Modelling groups
+The modelling was done for both of the groups, one modell for group A and one modell for group B. I applied a simple GLM-logit model to estimate the probability of `conversion` for player based on `total_gameends`. 
+
+The aim of the models is to see if players in group one or group to have a higher probability to `convert`.
+
+#### Validation of models
+The validation on modelling has been done by RMSE, accuracy and confussion matrix. Results from the two models are as follows.
+
+###### Results of model for Group A
+
+RMSE:
+```{r echo=FALSE}
+king_validate$a$rmse
+```
+
+Confusion matrix:
+```{r echo=FALSE}
+king_validate$a$confusion_matrix$table
+```
+
+Error estimation:
+```{r echo=FALSE}
+king_validate$a$confusion_matrix$overall
+```
+
+
+###### Results of model for group B
+
+RMSE:
+```{r echo=FALSE}
+king_validate$b$rmse
+```
+
+Confusion matrix:
+```{r echo=FALSE}
+king_validate$b$confusion_matrix$table
+```
+
+Error estimation:
+```{r echo=FALSE}
+king_validate$b$confusion_matrix$overall
+```
+
+It is clear that the models are not accurat. Based on the RMSE and the accuracy of the models more data would be of interest to look at. The confussion matrix somewhat tells us that the classification works, but as stated, it would be interesting to add something to the box.
+
+
+### Overall
+Game version for group B shows better results. For this reason, it is recommended to use version B.
+
+Regarding modelling more data is needed to better estimate the probability of conversion.
+
+//Per Marcus
+
